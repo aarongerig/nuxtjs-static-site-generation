@@ -1,9 +1,19 @@
 import pkg from './package'
+import axios from 'axios';
 
 export default {
   mode: 'universal',
 
-  generate: {},
+  generate: {
+    async routes() {
+      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+
+      return response.data.map(post => ({
+        route: `posts/${post.id}`,
+        payload: post,
+      }));
+    }
+  },
 
   /*
   ** Headers of the page

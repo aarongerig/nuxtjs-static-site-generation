@@ -25,8 +25,8 @@ export default {
   data() {
     return { id: this.$route.params.id }
   },
-  async asyncData({ params, $axios }) {
-    const post = await $axios.$get(`posts/${params.id}`)
+  async asyncData({ params, $axios, payload }) {
+    const post = payload || await $axios.$get(`posts/${params.id}`)
 
     return { post }
   }
